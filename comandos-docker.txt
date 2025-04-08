@@ -6,9 +6,9 @@ docker run --name pgadmin4 -p 15432:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com 
 
 docker network create library-network
 
-docker run --name librarydb -p 5433:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_USER=root -e POSTGRES_DB=library --network library-network  postgres:17.4
+docker run --name librarydb -p 5433:5432 -e POSTGRES_PASSWORD=root -e POSTGRES_USER=root -e POSTGRES_DB=library --network library-network -d  postgres:17.4
 
- dokcer run --name pgadmin4 -p 15432:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSOWRD=admin --network library-network dpage/pgadmin4
+ dokcer run --name pgadmin4 -p 15432:80 -d -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSOWRD=admin --network library-network dpage/pgadmin4
 
  #para achar alguma porta em aberto no docker
  netstat -aof | findstr 5432
