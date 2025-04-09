@@ -12,3 +12,5 @@ docker run --name librarydb -p 5433:5432 -d -e POSTGRES_PASSWORD=root -e POSTGRE
 
  #para achar alguma porta em aberto no docker
  netstat -aof | findstr 5432
+
+ para acessar o pgadmin4: http://localhost:15432/
