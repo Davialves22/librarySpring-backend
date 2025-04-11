@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 //mapeamento de entidades JPA
@@ -30,5 +31,6 @@ public class Autor {
     @Column(name = "nacionalidade", length = 50, nullable = false)
     private String nacionalidade;
 
-
+    @OneToMany(mappedBy = "autor") //um autor pra muitos livros
+    private List<Livro> livros;
 }
