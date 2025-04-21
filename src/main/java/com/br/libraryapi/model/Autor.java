@@ -33,6 +33,7 @@ public class Autor {
     @Column(name = "nacionalidade", length = 50, nullable = false)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor") //um autor pra muitos livros
+    //@OneToMany(mappedBy = "autor") //um autor pra muitos livros
+    @Transient//nao considere uma coluna
     private List<Livro> livros;
 }
