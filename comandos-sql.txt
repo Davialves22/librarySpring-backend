@@ -16,3 +16,7 @@ create table livro(
 	constraint chk_genero check (genero in ('FICCAO', 'ROMANCE', 'DRAMA',
 	'COMEDIA', 'FANTASIA', 'TERROR', 'DOCUMENTARIO','BIOGRAFIA'))
 );
+
+select l.titulo as Tiutlo_livro, a.nome as Nome_Autor
+from livro l
+join autor a on a.id = l.id_autor
