@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -36,10 +37,32 @@ public class AutorRepositoryTest {
             Autor autorEncontrado = possivelAutor.get();
             System.out.println("Dados do Autor:");
             System.out.println(autorEncontrado);
-
             autorEncontrado.setNome("J. K. Rowling");
-
             repository.save(autorEncontrado);
         }
+    }
+
+    @Test
+    public void listarTest() {
+        List<Autor> lista = repository.findAll();
+        lista.forEach(System.out::println);
+    }
+
+    @Test
+    public void countTest() {
+        System.out.println("Contagem de Autores:" + repository.count());
+    }
+
+    @Test
+    public void deletePorIdTest() {
+        var id = UUID.fromString("c66d7b21-3376-4aa4-8378-f67057acf6bd");
+        repository.deleteById(id);
+    }
+
+    @Test
+    public void deleteTest() {
+        var id = UUID.fromString("c66d7b21-3376-4aa4-8378-f67057acf6bd");
+        var JK = repository.findById(id).get();
+        repository.delete(JK);
     }
 }
