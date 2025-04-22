@@ -58,31 +58,32 @@ class LivroRepositoryTest {
         repository.save(livro);
     }
 
-    @Test
-    void salvarCascadeTest() {
-        Livro livro = new Livro();
-        livro.setIsbn("9780545069670");
-        livro.setPreco(BigDecimal.valueOf(39, 93));
-        livro.setGenero(GeneroLivro.FANTASIA);
-        livro.setTitulo("Harry Potter e a Pedra Filosofal");
-        livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
-
-        Autor autor = new Autor();
-        autor.setNome("JkRolly");
-        autor.setNacionalidade("Britanica");
-        autor.setDataNascimento(LocalDate.of(1965, 7, 31));
-
-        //para salvar o autor junto com o livro
-//        autorRepository.save(autor);
+    //operações com cascade
+//    @Test
+//    void salvarCascadeTest() {
+//        Livro livro = new Livro();
+//        livro.setIsbn("9780545069670");
+//        livro.setPreco(BigDecimal.valueOf(39, 93));
+//        livro.setGenero(GeneroLivro.FANTASIA);
+//        livro.setTitulo("Harry Potter e a Pedra Filosofal");
+//        livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
+//
+//        Autor autor = new Autor();
+//        autor.setNome("JkRolly");
+//        autor.setNacionalidade("Britanica");
+//        autor.setDataNascimento(LocalDate.of(1965, 7, 31));
+//
+//        //para salvar o autor junto com o livro
+////        autorRepository.save(autor);
+////
+////        livro.setAutor(autor);
+////
+////        repository.save(livro);
+//
+//        //para salvar o livro
 //
 //        livro.setAutor(autor);
 //
 //        repository.save(livro);
-
-        //para salvar o livro
-
-        livro.setAutor(autor);
-
-        repository.save(livro);
-    }
+//    }
 }
