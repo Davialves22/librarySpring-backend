@@ -58,6 +58,27 @@ class LivroRepositoryTest {
         repository.save(livro);
     }
 
+    @Test
+    void atualizarAutorDoLivro() {
+        UUID id = UUID.fromString("5d6431c6-971d-4bff-bea5-eb1c26207138");
+        var livroParaAtualizar = repository.findById(id).orElse(null);
+
+        UUID idAutor = UUID.fromString("acf61694-43ec-46a5-b186-89573ade3fe8");
+        autorRepository.findById(idAutor).orElse(null);
+
+        livroParaAtualizar.setTitulo("Harry Potter e a Câmara Secreta");
+        livroParaAtualizar.setPreco(BigDecimal.valueOf(42, 18));
+        livroParaAtualizar.setDataPublicacao(LocalDate.of(1998, 7, 2));
+
+        repository.save(livroParaAtualizar);
+    }
+
+    @Test
+    void deletar() {
+        UUID id = UUID.fromString("acf61694-43ec-46a5-b186-89573ade3fe8");
+        repository.deleteById(id);
+    }
+
     //operações com cascade
 //    @Test
 //    void salvarCascadeTest() {
