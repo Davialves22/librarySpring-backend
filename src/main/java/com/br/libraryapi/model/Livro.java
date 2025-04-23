@@ -40,7 +40,10 @@ public class Livro {
     //private BigDecimal preco;
 
     //mapeamento com relacionamento
-    @ManyToOne //(cascade = CascadeType.ALL) //muitos livros para um autor
+    @ManyToOne (
+//            cascade = CascadeType.ALL
+    fetch = FetchType.LAZY
+    ) //muitos livros para um autor
     @JoinColumn(name = "id_autor")
     private Autor autor;
 }
