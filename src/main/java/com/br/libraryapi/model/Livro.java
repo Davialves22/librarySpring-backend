@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "livro") //nao e obrigatorio
 @Data
+@ToString(exclude = "autor")//para nao imprimir os dados do autor
 
 public class Livro {
 

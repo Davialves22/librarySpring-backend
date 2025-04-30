@@ -6,6 +6,7 @@ import com.br.libraryapi.model.Livro;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -75,7 +76,7 @@ public class AutorRepositoryTest {
     }
 
     @Test
-    void salvarAutorComLivros(){
+    void salvarAutorComLivros() {
         Autor autor = new Autor();
         autor.setNome("JkRolly");
         autor.setNacionalidade("Britanica");
@@ -96,5 +97,17 @@ public class AutorRepositoryTest {
 
         repository.save(autor);
         livroRepository.saveAll(autor.getLivros());
+    }
+
+    @Test
+    void listarLivrosAutor() {
+        var id = UUID.fromString("85a0dbad-fc6a-4628-bb37-67d8c34c81ee");
+        var autor = repository.findById(id).get();
+
+//buscar os livros do autor
+
+        livroRepository.fin
+        autor.getLivros().forEach(System.out::println);
+
     }
 }

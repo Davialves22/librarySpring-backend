@@ -15,7 +15,7 @@ import java.util.UUID;
 @Table(name = "autor", schema = "public") //nao e obrigatorio
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "livros")
 
 public class Autor {
 
@@ -33,7 +33,7 @@ public class Autor {
     @Column(name = "nacionalidade", length = 50, nullable = false)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor") //um autor pra muitos livros
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.LAZY) //um autor pra muitos livros
     //@Transient//nao considere uma coluna
     private List<Livro> livros;
 }
