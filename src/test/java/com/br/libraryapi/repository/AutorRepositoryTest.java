@@ -1,11 +1,15 @@
 package com.br.libraryapi.repository;
 
 import com.br.libraryapi.model.Autor;
+import com.br.libraryapi.model.GeneroLivro;
+import com.br.libraryapi.model.Livro;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,6 +19,10 @@ public class AutorRepositoryTest {
 
     @Autowired
     AutorRepository repository;
+
+    @Autowired
+    LivroRepository livroRepository;
+
 
     @Test
     public void salvarTest() {
@@ -64,5 +72,29 @@ public class AutorRepositoryTest {
         var id = UUID.fromString("c66d7b21-3376-4aa4-8378-f67057acf6bd");
         var JK = repository.findById(id).get();
         repository.delete(JK);
+    }
+
+    @Test
+    void salvarAutorComLivros(){
+        Autor autor = new Autor();
+        autor.setNome("JkRolly");
+        autor.setNacionalidade("Britanica");
+        autor.setDataNascimento(LocalDate.of(1965, 7, 31));
+        var AutorSalvo = repository.save(autor);
+        System.out.println("Autor Salvo: " + AutorSalvo);
+
+        Livro livro = new Livro();
+        livro.setIsbn("9780545069670");
+        livro.setPreco(BigDecimal.valueOf(67, 71));
+        livro.setGenero(GeneroLivro.FANTASIA);
+        livro.setTitulo("Harry Potter e o Cálice de Fogo");
+        livro.setDataPublicacao(LocalDate.of(2000, 7, 8));
+        livro.setAutor(autor);
+
+        autor.setLivros(new ArrayList<>());
+        autor.getLivros().add(livro);
+
+        repository.save(autor);
+        livroRepository.saveAll(autor.getLivros());
     }
 }
