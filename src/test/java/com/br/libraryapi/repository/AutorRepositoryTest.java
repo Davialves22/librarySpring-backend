@@ -106,7 +106,8 @@ public class AutorRepositoryTest {
 
 //buscar os livros do autor
 
-        livroRepository.fin
+        List<Livro> livrosLista = livroRepository.findByAutor(autor);
+        autor.setLivros(livrosLista);
         autor.getLivros().forEach(System.out::println);
 
     }
