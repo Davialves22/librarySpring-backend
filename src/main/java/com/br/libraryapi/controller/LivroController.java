@@ -26,7 +26,7 @@ public class LivroController {
     private LivroRepository livroRepository;
 
     @Autowired
-    private AutorRepository autorRepository; // Certifique-se de importar o AutorRepository
+    private AutorRepository autorRepository;
 
     // post para criar um livro com arquivos de imagem
     @PostMapping("/cadastrar")
