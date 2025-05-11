@@ -12,7 +12,7 @@ import java.util.UUID;
 //mapeamento de entidades JPA
 
 @Entity
-@Table(name = "autor", schema = "public") //nao e obrigatorio
+@Table(name = "autor", schema = "public") // nao e obrigatorio
 @Getter
 @Setter
 @ToString(exclude = "livros")
@@ -20,8 +20,8 @@ import java.util.UUID;
 public class Autor {
 
     @Id
-    @Column(name = "id")// nao e obrigatorio
-    @GeneratedValue(strategy = GenerationType.UUID) //id gerado automaticamente
+    @Column(name = "id") // nao e obrigatorio
+    @GeneratedValue(strategy = GenerationType.UUID) // id gerado automaticamente
     private UUID id;
 
     @Column(name = "nome", length = 100, nullable = false)
@@ -33,7 +33,7 @@ public class Autor {
     @Column(name = "nacionalidade", length = 50, nullable = false)
     private String nacionalidade;
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.LAZY) //um autor pra muitos livros
-    //@Transient//nao considere uma coluna
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // um autor pra muitos livros
+    // @Transient//nao considere uma coluna
     private List<Livro> livros;
 }
