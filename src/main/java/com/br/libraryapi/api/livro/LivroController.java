@@ -4,7 +4,7 @@ import com.br.libraryapi.model.Livro;
 import com.br.libraryapi.model.Autor;
 import com.br.libraryapi.model.GeneroLivro;
 import com.br.libraryapi.repository.LivroRepository;
-import com.br.libraryapi.repository.AutorRepository; // Certifique-se de importar o AutorRepository
+import com.br.libraryapi.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,15 +20,13 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/livros")
+@CrossOrigin
+
 public class LivroController {
 
     @Autowired
-    private LivroRepository livroRepository;
+    private LivroService LivroService;
 
-    @Autowired
-    private AutorRepository autorRepository;
-
-    // post para criar um livro com arquivos de imagem
     @PostMapping("/cadastrar")
     public ResponseEntity<Livro> cadastrarLivro(
             @RequestParam("isbn") String isbn,
@@ -90,7 +88,7 @@ public class LivroController {
         }
 
         return ResponseEntity.ok()
-                .contentType(MediaType.IMAGE_JPEG) 
+                .contentType(MediaType.IMAGE_JPEG)
                 .body(imagem);
     }
 }
