@@ -27,8 +27,11 @@ public class LivroController {
     @Autowired
     private LivroService LivroService;
 
-    @PostMapping("/cadastrar")
-    public ResponseEntity<Livro> cadastrarLivro(
+    @PostMapping
+
+    public ResponseEntity<Livro> save(@RequestBody LivroRequest request)
+
+    cadastrarLivro(
             @RequestParam("isbn") String isbn,
             @RequestParam("titulo") String titulo,
             @RequestParam("dataPublicacao") String dataPublicacao,
