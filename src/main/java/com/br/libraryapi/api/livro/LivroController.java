@@ -90,7 +90,7 @@ public class LivroController {
         }
 
         return ResponseEntity.ok()
-                .contentType(MediaType.IMAGE_JPEG) // ou IMAGE_PNG, dependendo do formato
+                .contentType(MediaType.IMAGE_JPEG) 
                 .body(imagem);
     }
 }
