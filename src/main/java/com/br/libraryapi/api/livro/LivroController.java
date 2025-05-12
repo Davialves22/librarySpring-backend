@@ -1,4 +1,4 @@
-package com.br.libraryapi.controller;
+package com.br.libraryapi.api.livro;
 
 import com.br.libraryapi.model.Livro;
 import com.br.libraryapi.model.Autor;
