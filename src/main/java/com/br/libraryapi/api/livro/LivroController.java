@@ -25,7 +25,7 @@ import java.util.UUID;
 public class LivroController {
 
     @Autowired
-    private LivroService LivroService;
+    private LivroService LivroService
 
     @PostMapping("/cadastrar")
     public ResponseEntity<Livro> cadastrarLivro(
