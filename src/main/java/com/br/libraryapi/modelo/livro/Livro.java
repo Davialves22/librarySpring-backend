@@ -38,7 +38,7 @@ public class Livro extends EntidadeAuditavel {
     @Column(name = "genero", length = 30, nullable = false)
     private GeneroLivro genero;
 
-    @Column
+    @Column(precision = 10, scale = 2)
     private BigDecimal preco;
 
     @Column
@@ -50,6 +50,9 @@ public class Livro extends EntidadeAuditavel {
     @Lob
     @Column(name = "imagem")
     private byte[] imagem;
+
+    @Column(name = "imagem_url")
+    private String imagemUrl;
 
     @Lob
     @Column(name = "pdf")

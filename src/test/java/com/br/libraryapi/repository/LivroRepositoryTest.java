@@ -19,7 +19,7 @@ class LivroRepositoryTest {
     void salvarTest() {
         Livro livro = new Livro();
         livro.setIsbn("9780545069670");
-        livro.setPreco(BigDecimal.valueOf(39, 93));
+        livro.setPreco(BigDecimal.valueOf(39.93));
         livro.setGenero(GeneroLivro.FANTASIA);
         livro.setTitulo("Harry Potter e a Pedra Filosofal");
         livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
@@ -40,9 +40,10 @@ class LivroRepositoryTest {
         livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
 
         // Defina o nome do autor diretamente
-        livro.setNomeAutor("J.K. Rowling"); // Aqui também, o autor é apenas um nome em String
+        livro.setNomeAutor("J.K. Rowling"); 
+        livro.setNacionalidadeAutor("Britânica");
 
-        repository.save(livro); // Salvando o livro com o autor
+        repository.save(livro); 
     }
 
     @Test

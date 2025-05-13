@@ -23,7 +23,8 @@ public class LivroRequest {
     private String nomeAutor;
     private String nacionalidadeAutor;
 
-    private MultipartFile imagem;
+    private MultipartFile imagem;    // Para a imagem binária
+    private String imagemUrl;        // Para o link da imagem
     private MultipartFile pdf;
 
     // Método que converte o DTO em entidade Livro
@@ -36,6 +37,8 @@ public class LivroRequest {
         livro.setPreco(preco);
         livro.setNomeAutor(nomeAutor);
         livro.setNacionalidadeAutor(nacionalidadeAutor);
+         livro.setImagemUrl(imagemUrl);  
+        
         return livro;
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class LivroService {
@@ -22,12 +21,17 @@ public class LivroService {
         // Converte o DTO em entidade Livro
         Livro livro = request.build();
 
-        // converter imagem para byte[]
+        // converter imagem para byte[] se imagem binária for fornecida
         if (request.getImagem() != null && !request.getImagem().isEmpty()) {
-            livro.setImagem(request.getImagem().getBytes());
+            livro.setImagem(request.getImagem().getBytes());  // Salvar a imagem binária
         }
 
-        // converte PDF para byte[]
+        // armazenar o URL da imagem caso seja fornecido
+        if (request.getImagemUrl() != null && !request.getImagemUrl().isEmpty()) {
+            livro.setImagemUrl(request.getImagemUrl());  // Salvar o link da imagem
+        }
+
+        // converte PDF para byte[] se for fornecido
         if (request.getPdf() != null && !request.getPdf().isEmpty()) {
             livro.setPdf(request.getPdf().getBytes());
         }

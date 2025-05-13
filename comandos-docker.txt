@@ -5,7 +5,7 @@ rodar o pgadmin4:
 docker run --name pgadmin4 -p 15432:80 -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4;
 
 ordem:
-docker network create library-network
+    docker network create library-network
 
 docker run --name librarydb -p 5433:5432 -d -e POSTGRES_PASSWORD=root -e POSTGRES_USER=root -e POSTGRES_DB=library --network library-network postgres:17.4
 
