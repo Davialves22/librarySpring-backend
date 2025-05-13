@@ -1,25 +1,19 @@
 package com.br.libraryapi.repository;
 
-import com.br.libraryapi.model.GeneroLivro;
-import com.br.libraryapi.model.Livro.Livro;
-import com.br.libraryapi.model.Usuario.Usuario;
-
+import com.br.libraryapi.modelo.livro.GeneroLivro;
+import com.br.libraryapi.modelo.livro.Livro;
+import com.br.libraryapi.modelo.livro.LivroRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
 
 @SpringBootTest
 class LivroRepositoryTest {
-    @Autowired
-    LivroRepository repository;
 
     @Autowired
-    AutorRepository autorRepository;
+    LivroRepository repository;
 
     @Test
     void salvarTest() {
@@ -30,13 +24,10 @@ class LivroRepositoryTest {
         livro.setTitulo("Harry Potter e a Pedra Filosofal");
         livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
 
-        Usuario autor = autorRepository
-                .findById(UUID.fromString("acf61694-43ec-46a5-b186-89573ade3fe8"))
-                .orElse(null);
+        // Defina o nome do autor diretamente como String
+        livro.setNomeAutor("J.K. Rowling"); // Aqui, armazenamos o nome do autor diretamente
 
-        livro.setAutor(new Usuario());
-
-        repository.save(livro);
+        repository.save(livro); // Salvando o livro
     }
 
     @Test
@@ -48,78 +39,39 @@ class LivroRepositoryTest {
         livro.setTitulo("Harry Potter e o Prisioneiro de Askaban");
         livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
 
-        Usuario autor = new Usuario();
-        autor.setNome("JkRolly");
-        autor.setNacionalidade("Britanica");
-        autor.setDataNascimento(LocalDate.of(1965, 7, 31));
+        // Defina o nome do autor diretamente
+        livro.setNomeAutor("J.K. Rowling"); // Aqui também, o autor é apenas um nome em String
 
-        autorRepository.save(autor);
-
-        livro.setAutor(autor);
-
-        repository.save(livro);
+        repository.save(livro); // Salvando o livro com o autor
     }
 
     @Test
     void atualizarAutorDoLivro() {
-        UUID id = UUID.fromString("5d6431c6-971d-4bff-bea5-eb1c26207138");
+        Long id = 1L; // Usando Long para buscar o livro
         var livroParaAtualizar = repository.findById(id).orElse(null);
 
-        UUID idAutor = UUID.fromString("acf61694-43ec-46a5-b186-89573ade3fe8");
-        autorRepository.findById(idAutor).orElse(null);
-
-        livroParaAtualizar.setTitulo("Harry Potter e a Câmara Secreta");
-        livroParaAtualizar.setPreco(BigDecimal.valueOf(42, 18));
-        livroParaAtualizar.setDataPublicacao(LocalDate.of(1998, 7, 2));
-
-        repository.save(livroParaAtualizar);
+        if (livroParaAtualizar != null) {
+            livroParaAtualizar.setTitulo("Harry Potter e a Câmara Secreta");
+            livroParaAtualizar.setPreco(BigDecimal.valueOf(42, 18));
+            livroParaAtualizar.setDataPublicacao(LocalDate.of(1998, 7, 2));
+            livroParaAtualizar.setNomeAutor("J.K. Rowling"); // Atualizando o nome do autor
+            repository.save(livroParaAtualizar); // Salvando a atualização
+        }
     }
 
     @Test
     void deletar() {
-        UUID id = UUID.fromString("acf61694-43ec-46a5-b186-89573ade3fe8");
-        repository.deleteById(id);
+        Long id = 1L; // Usando Long para deletar o livro
+        repository.deleteById(id); // Deletando o livro com o ID correto
     }
 
     @Test
-    @Transactional
     void buscarLivroTest() {
-        UUID id = UUID.fromString("5d6431c6-971d-4bff-bea5-eb1c26207138");
+        Long id = 1L; // Usando Long para buscar o livro
         Livro livro = repository.findById(id).orElse(null);
-        System.out.println("Livro:");
-        System.out.println(livro.getTitulo());
-        System.out.println("Autor:");
-        System.out.println(livro.getAutor().getNome());
+        if (livro != null) {
+            System.out.println("Livro: " + livro.getTitulo());
+            System.out.println("Autor: " + livro.getNomeAutor()); // O autor é uma String
+        }
     }
-
-
-
-    //operações com cascade
-//    @Test
-//    void salvarCascadeTest() {
-//        Livro livro = new Livro();
-//        livro.setIsbn("9780545069670");
-//        livro.setPreco(BigDecimal.valueOf(39, 93));
-//        livro.setGenero(GeneroLivro.FANTASIA);
-//        livro.setTitulo("Harry Potter e a Pedra Filosofal");
-//        livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
-//
-//        Autor autor = new Autor();
-//        autor.setNome("JkRolly");
-//        autor.setNacionalidade("Britanica");
-//        autor.setDataNascimento(LocalDate.of(1965, 7, 31));
-//
-//        //para salvar o autor junto com o livro
-////        autorRepository.save(autor);
-////
-////        livro.setAutor(autor);
-////
-////        repository.save(livro);
-//
-//        //para salvar o livro
-//
-//        livro.setAutor(autor);
-//
-//        repository.save(livro);
-//    }
 }

@@ -45,7 +45,7 @@ public class LivroService {
     }
 
     // Busca um livro pelo ID (UUID), lança exceção se não encontrar
-    public Livro obterPorID(UUID id) {
+    public Livro obterPorID(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
     }

@@ -34,13 +34,13 @@ public class LivroController {
 
     // Buscar livro por ID (UUID)
     @GetMapping("/{id}")
-    public Livro obterPorID(@PathVariable UUID id) {
+    public Livro obterPorID(@PathVariable Long id) {
         return livroService.obterPorID(id);
     }
 
     // Retornar PDF do livro por ID
     @GetMapping("/pdf/{id}")
-    public ResponseEntity<byte[]> obterPdf(@PathVariable UUID id) {
+    public ResponseEntity<byte[]> obterPdf(@PathVariable Long id) {
         Livro livro = livroService.obterPorID(id);
         if (livro.getPdf() == null)
             return ResponseEntity.notFound().build();
@@ -52,7 +52,7 @@ public class LivroController {
 
     // Retornar imagem do livro por ID
     @GetMapping("/imagem/{id}")
-    public ResponseEntity<byte[]> obterImagem(@PathVariable UUID id) {
+    public ResponseEntity<byte[]> obterImagem(@PathVariable Long id) {
         Livro livro = livroService.obterPorID(id);
         if (livro.getImagem() == null)
             return ResponseEntity.notFound().build();
