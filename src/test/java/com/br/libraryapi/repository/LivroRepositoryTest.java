@@ -1,8 +1,9 @@
 package com.br.libraryapi.repository;
 
-import com.br.libraryapi.model.Autor;
 import com.br.libraryapi.model.GeneroLivro;
-import com.br.libraryapi.model.Livro;
+import com.br.libraryapi.model.Livro.Livro;
+import com.br.libraryapi.model.Usuario.Usuario;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,11 +30,11 @@ class LivroRepositoryTest {
         livro.setTitulo("Harry Potter e a Pedra Filosofal");
         livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
 
-        Autor autor = autorRepository
+        Usuario autor = autorRepository
                 .findById(UUID.fromString("acf61694-43ec-46a5-b186-89573ade3fe8"))
                 .orElse(null);
 
-        livro.setAutor(new Autor());
+        livro.setAutor(new Usuario());
 
         repository.save(livro);
     }
@@ -47,7 +48,7 @@ class LivroRepositoryTest {
         livro.setTitulo("Harry Potter e o Prisioneiro de Askaban");
         livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
 
-        Autor autor = new Autor();
+        Usuario autor = new Usuario();
         autor.setNome("JkRolly");
         autor.setNacionalidade("Britanica");
         autor.setDataNascimento(LocalDate.of(1965, 7, 31));

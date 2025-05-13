@@ -1,8 +1,9 @@
 package com.br.libraryapi.repository;
 
-import com.br.libraryapi.model.Autor;
 import com.br.libraryapi.model.GeneroLivro;
-import com.br.libraryapi.model.Livro;
+import com.br.libraryapi.model.Livro.Livro;
+import com.br.libraryapi.model.Usuario.Usuario;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,7 +28,7 @@ public class AutorRepositoryTest {
 
     @Test
     public void salvarTest() {
-        Autor autor = new Autor();
+        Usuario autor = new Usuario();
         autor.setNome("JkRolly");
         autor.setNacionalidade("Britanica");
         autor.setDataNascimento(LocalDate.of(1965, 7, 31));
@@ -39,11 +40,11 @@ public class AutorRepositoryTest {
     public void autalizarTeste() {
         var id = UUID.fromString("c66d7b21-3376-4aa4-8378-f67057acf6bd");
 
-        Optional<Autor> possivelAutor = repository.findById(id);
+        Optional<Usuario> possivelAutor = repository.findById(id);
 
         if (possivelAutor.isPresent()) {
 
-            Autor autorEncontrado = possivelAutor.get();
+            Usuario autorEncontrado = possivelAutor.get();
             System.out.println("Dados do Autor:");
             System.out.println(autorEncontrado);
             autorEncontrado.setNome("J. K. Rowling");
@@ -53,7 +54,7 @@ public class AutorRepositoryTest {
 
     @Test
     public void listarTest() {
-        List<Autor> lista = repository.findAll();
+        List<Usuario> lista = repository.findAll();
         lista.forEach(System.out::println);
     }
 
@@ -77,7 +78,7 @@ public class AutorRepositoryTest {
 
     @Test
     void salvarAutorComLivros() {
-        Autor autor = new Autor();
+        Usuario autor = new Usuario();
         autor.setNome("JkRolly");
         autor.setNacionalidade("Britanica");
         autor.setDataNascimento(LocalDate.of(1965, 7, 31));

@@ -1,4 +1,4 @@
-package com.br.libraryapi.model;
+package com.br.libraryapi.modelo.livro;
 
 public enum GeneroLivro {
     FICCAO, ROMANCE, DRAMA,
