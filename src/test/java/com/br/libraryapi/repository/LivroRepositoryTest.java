@@ -34,16 +34,21 @@ class LivroRepositoryTest {
     void salvarAutorELivroTest() {
         Livro livro = new Livro();
         livro.setIsbn("9780545069670");
-        livro.setPreco(BigDecimal.valueOf(39, 93));
+        livro.setPreco(BigDecimal.valueOf(39.93)); // Corrigido o valor do preço
         livro.setGenero(GeneroLivro.FANTASIA);
         livro.setTitulo("Harry Potter e o Prisioneiro de Askaban");
         livro.setDataPublicacao(LocalDate.of(1997, 6, 26));
 
         // Defina o nome do autor diretamente
-        livro.setNomeAutor("J.K. Rowling"); 
+        livro.setNomeAutor("J.K. Rowling");
         livro.setNacionalidadeAutor("Britânica");
 
-        repository.save(livro); 
+        // Defina o link da imagem
+        livro.setImagemUrl(
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwaWVRpmyv0qXNRIwqcCyz7u9dzuUcu8jL9Q&s");
+
+        // Salve o livro no repositório
+        repository.save(livro);
     }
 
     @Test
