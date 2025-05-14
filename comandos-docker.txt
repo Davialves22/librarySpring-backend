@@ -15,3 +15,5 @@ docker run --name pgadmin4 -p 15432:80 -d -e PGADMIN_DEFAULT_EMAIL=admin@admin.c
 netstat -aof | findstr 5432
 
 para acessar o pgadmin4: http://localhost:15432/
+
+docker-compose up --build
