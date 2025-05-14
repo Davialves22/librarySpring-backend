@@ -19,7 +19,7 @@ public class LivroController {
     @Autowired
     private LivroService livroService;
 
-    // Criar livro (com imagem e PDF)
+    // Criar livro com imagem e PDF
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Livro> save(@ModelAttribute LivroRequest request) throws IOException {
         Livro livro = livroService.save(request);
