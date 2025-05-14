@@ -26,19 +26,18 @@ public class LivroController {
         return new ResponseEntity<>(livro, HttpStatus.CREATED);
     }
 
-    // Listar todos os livros
     @GetMapping
     public List<Livro> listarTodos() {
         return livroService.listarTodos();
     }
 
-    // Buscar livro por ID (UUID)
+    // Buscar o livro por ID
     @GetMapping("/{id}")
     public Livro obterPorID(@PathVariable Long id) {
         return livroService.obterPorID(id);
     }
 
-    // Retornar PDF do livro por ID
+    // Buscar o livro por pdf
     @GetMapping("/pdf/{id}")
     public ResponseEntity<byte[]> obterPdf(@PathVariable Long id) {
         Livro livro = livroService.obterPorID(id);
@@ -50,7 +49,7 @@ public class LivroController {
                 .body(livro.getPdf());
     }
 
-    // Retornar imagem do livro por ID
+    // Retornar imagem do livro
     @GetMapping("/imagem/{id}")
     public ResponseEntity<byte[]> obterImagem(@PathVariable Long id) {
         Livro livro = livroService.obterPorID(id);
