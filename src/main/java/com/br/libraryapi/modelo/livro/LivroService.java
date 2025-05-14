@@ -1,6 +1,6 @@
 package com.br.libraryapi.modelo.livro;
 
-import com.br.libraryapi.api.livro.LivroRequest; // Importa o DTO de entrada
+import com.br.libraryapi.api.livro.LivroRequest;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,43 +14,79 @@ public class LivroService {
     @Autowired
     private LivroRepository repository;
 
-    // Método para salvar o livro, agora recebendo o DTO LivroRequest
+    // Salvar livro
     @Transactional
     public Livro save(LivroRequest request) throws IOException {
-
-        // Converte o DTO em entidade Livro
         Livro livro = request.build();
 
-        // converter imagem para byte[] se imagem binária for fornecida
         if (request.getImagem() != null && !request.getImagem().isEmpty()) {
-            livro.setImagem(request.getImagem().getBytes());  // Salvar a imagem binária
+            livro.setImagem(request.getImagem().getBytes());
         }
 
-        // armazenar o URL da imagem caso seja fornecido
         if (request.getImagemUrl() != null && !request.getImagemUrl().isEmpty()) {
-            livro.setImagemUrl(request.getImagemUrl());  // Salvar o link da imagem
+            livro.setImagemUrl(request.getImagemUrl());
         }
 
-        // converte PDF para byte[] se for fornecido
         if (request.getPdf() != null && !request.getPdf().isEmpty()) {
             livro.setPdf(request.getPdf().getBytes());
         }
 
-        // Marcar como habilitado por padrão
         livro.setHabilitado(Boolean.TRUE);
 
-        // Salvar no banco de dados
         return repository.save(livro);
     }
 
-    // Retornar todos os livros cadastrados
+    // Listar todos os livros
     public List<Livro> listarTodos() {
         return repository.findAll();
     }
 
-    // Busca um livro pelo ID (UUID), lança exceção se não encontrar
+    // Buscar livro por ID
     public Livro obterPorID(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+    }
+
+    // Atualizar livro
+    @Transactional
+    public void update(Long id, LivroRequest request) throws IOException {
+        Livro livro = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        // Atualiza campos básicos
+        livro.setTitulo(request.getTitulo());
+        livro.setIsbn(request.getIsbn());
+        livro.setGenero(request.getGenero());
+        livro.setNomeAutor(request.getNomeAutor());
+        livro.setNacionalidadeAutor(request.getNacionalidadeAutor());
+        livro.setDataPublicacao(request.getDataPublicacao());
+        livro.setPreco(request.getPreco());
+
+        // Atualiza imagem se enviada
+        if (request.getImagem() != null && !request.getImagem().isEmpty()) {
+            livro.setImagem(request.getImagem().getBytes());
+        }
+
+        // Atualiza URL da imagem se enviada
+        if (request.getImagemUrl() != null && !request.getImagemUrl().isEmpty()) {
+            livro.setImagemUrl(request.getImagemUrl());
+        }
+
+        // Atualiza PDF se enviado
+        if (request.getPdf() != null && !request.getPdf().isEmpty()) {
+            livro.setPdf(request.getPdf().getBytes());
+        }
+
+        repository.save(livro);
+    }
+
+    // Deletar livro (lógica de desabilitação)
+    @Transactional
+    public void delete(Long id) {
+        Livro livro = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Livro não encontrado"));
+
+        livro.setHabilitado(Boolean.FALSE);
+        repository.save(livro);
     }
 }
